@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.android.navigation.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
@@ -102,6 +103,23 @@ class GameFragment : Fragment() {
                     }
                 } else {
                     // Game over! A wrong answer sends us to the gameOverFragment.
+                }
+
+                // answer matches, we have the correct answer.
+                if (answers[answerIndex] == currentQuestion.answers[0]) {
+                    questionIndex++
+                    // Advance to the next question
+                    if (questionIndex < numQuestions) {
+                        currentQuestion = questions[questionIndex]
+                        setQuestion()
+                        binding.invalidateAll()
+                    } else {
+                        // Navigate to win fragment
+                        view.findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
+                    }
+                } else {
+                    // Navigate to lose fragment
+                    view.findNavController().navigate(R.id.action_gameFragment_to_gameOverFragment)
                 }
             }
         }
