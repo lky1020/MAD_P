@@ -100,26 +100,15 @@ class GameFragment : Fragment() {
                         binding.invalidateAll()
                     } else {
                         // We've won!  Navigate to the gameWonFragment.
+                        // Using directions to navigate to the GameWonFragment
+                        view.findNavController()
+                                .navigate(GameFragmentDirections.actionGameFragmentToGameWonFragment(numQuestions, questionIndex))
                     }
                 } else {
                     // Game over! A wrong answer sends us to the gameOverFragment.
-                }
-
-                // answer matches, we have the correct answer.
-                if (answers[answerIndex] == currentQuestion.answers[0]) {
-                    questionIndex++
-                    // Advance to the next question
-                    if (questionIndex < numQuestions) {
-                        currentQuestion = questions[questionIndex]
-                        setQuestion()
-                        binding.invalidateAll()
-                    } else {
-                        // Navigate to win fragment
-                        view.findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
-                    }
-                } else {
-                    // Navigate to lose fragment
-                    view.findNavController().navigate(R.id.action_gameFragment_to_gameOverFragment)
+                    // Using directions to navigate to the GameOverFragment
+                    view.findNavController()
+                            .navigate(GameFragmentDirections.actionGameFragmentToGameOverFragment())
                 }
             }
         }

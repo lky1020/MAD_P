@@ -28,17 +28,17 @@ class TitleFragment : Fragment() {
         // Set the handler for the Play button
         binding.playButton.setOnClickListener{
             // Get the nav controller
-            view?.findNavController()?.navigate(R.id.action_titleFragment_to_gameFragment)
+            view?.findNavController()?.navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
         }
 
         // Set the handler for the Rules Button
         binding.rulesButton.setOnClickListener{
-            view?.findNavController()?.navigate(R.id.action_titleFragment_to_rulesFragment)
+            view?.findNavController()?.navigate(TitleFragmentDirections.actionTitleFragmentToRulesFragment())
         }
 
         // Set the handler for the About Button
         binding.aboutButton.setOnClickListener{
-            view?.findNavController()?.navigate(R.id.action_titleFragment_to_aboutFragment)
+            view?.findNavController()?.navigate(TitleFragmentDirections.actionTitleFragmentToAboutFragment())
         }
 
         // Indicate has the options menu
