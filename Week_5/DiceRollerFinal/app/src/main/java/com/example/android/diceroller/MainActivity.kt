@@ -18,11 +18,14 @@ package com.example.android.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import java.util.*
+
+const val KEY_DICE_NUM = "dice_num_key"
 
 /**
  * DiceRoller demonstrates simple interactivity in an Android app.
@@ -32,6 +35,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     lateinit var diceImage : ImageView
+    private var diceNum = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,15 +46,37 @@ class MainActivity : AppCompatActivity() {
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener { rollDice() }
         diceImage = findViewById(R.id.dice_image)
+
+        if(savedInstanceState != null){
+            diceNum = savedInstanceState.getInt(KEY_DICE_NUM, 0)
+            Log.i("Testing", "Hello $diceNum")
+            updateDiceRoller(diceNum)
+            Log.i("Testing", "Testing 1")
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        //Save data to Bundle
+        outState.putInt(KEY_DICE_NUM, diceNum)
     }
 
     /**
      * Click listener for the Roll button.
      */
     private fun rollDice() {
-        // Toast.makeText(this, "button clicked",
-        //  Toast.LENGTH_SHORT).show()
         val randomInt = (1..6).random()
+        this.diceNum = randomInt
+
+        Log.i("Testing", "Dice Num $diceNum")
+        Log.i("Testing", "Testing 2")
+
+        updateDiceRoller(randomInt)
+    }
+
+    private fun updateDiceRoller(randomInt: Int){
+        Log.i("Testing", "Hihi hello")
 
         val drawableResource = when (randomInt) {
             1 -> R.drawable.dice_1
@@ -61,6 +87,8 @@ class MainActivity : AppCompatActivity() {
             else -> R.drawable.dice_6
         }
 
+        Log.i("Testing", "Hihi hello 2")
         diceImage.setImageResource(drawableResource)
+        Log.i("Testing", "Hihi hello 3")
     }
 }
