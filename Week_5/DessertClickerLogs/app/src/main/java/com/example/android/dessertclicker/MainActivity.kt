@@ -18,6 +18,7 @@ package com.example.android.dessertclicker
 
 import android.content.ActivityNotFoundException
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -27,6 +28,10 @@ import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import com.example.android.dessertclicker.databinding.ActivityMainBinding
 import timber.log.Timber
+
+const val KEY_REVENUE = "revenue_key"
+const val KEY_DESSERT_SOLD = "dessert_sold_key"
+const val KEY_TIMER_SECONDS = "timer_seconds_key"
 
 //AppCompatActivity subclass from FragmentActivity and FragmentActivity is superclass implements LifecycleOwner
 class MainActivity : AppCompatActivity() {
@@ -65,6 +70,7 @@ class MainActivity : AppCompatActivity() {
     )
     private var currentDessert = allDesserts[0]
 
+    //Check whether got savedInstanceState first, if got then load it
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -80,6 +86,15 @@ class MainActivity : AppCompatActivity() {
         // Create desserttimer object
         // Pass mainActivity's lifecycle to the DessertTimer costructor
         dessertTimer = DessertTimer(this.lifecycle)
+
+        // Retrieve the valud from savedInstanceState
+        if(savedInstanceState != null){
+            revenue = savedInstanceState.getInt(KEY_REVENUE, 0)
+            dessertsSold = savedInstanceState.getInt(KEY_DESSERT_SOLD, 0)
+            dessertTimer.secondsCount = savedInstanceState.getInt(KEY_TIMER_SECONDS, 0)
+            // Update the dessert
+            showCurrentDessert()
+        }
 
         // Set the TextViews to the right values
         binding.revenue = revenue
@@ -177,6 +192,17 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
 
         Timber.i("onStop Called")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        //Save data to Bundle
+        outState.putInt(KEY_REVENUE, revenue)
+        outState.putInt(KEY_DESSERT_SOLD, dessertsSold)
+        outState.putInt(KEY_TIMER_SECONDS, dessertTimer.secondsCount)
+
+        Timber.i("onSaveInstanceState Called")
     }
 
     override fun onDestroy() {
