@@ -8,26 +8,22 @@ class GameViewModel : ViewModel() {
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
 
-    // Declare private mutable variable that can only be modified
-    // within the class it is declared.
-    private var _count = 0
-
-    private var currentWordCount = 0
     private lateinit var _currentScrambledWord: String
+    val currentScrambledWord: String
+        get() = _currentScrambledWord
 
-    // Declare another public immutable field and override its getter method.
-    // Return the private property's value in the getter method.
-    // When count is accessed, the get() function is called and
-    // the value of _count is returned.
-    private var _score = 0
-    val score: Int
-        get() = _score
-
+    private var _count = 0
     val count: Int
         get() = _count
 
-    val currentScrambledWord: String
-        get() = _currentScrambledWord
+    // -1 value because we will call getNextWord when initialize this view model
+    private var _currentWordCount = -1
+    val currentWordCount: Int
+        get() = _currentWordCount
+
+    private var _score = 0
+    val score: Int
+        get() = _score
 
     // initializer block
     init {
@@ -42,6 +38,16 @@ class GameViewModel : ViewModel() {
         Log.d("GameFragment", "GameViewModel destroyed!")
     }
 
+    /*
+    * Re-initializes the game data to restart the game.
+    */
+    fun reinitializeData() {
+        _score = 0
+        _currentWordCount = 0
+        wordsList.clear()
+        getNextWord()
+    }
+
     private fun getNextWord(){
         currentWord = allWordsList.random()
         val tempWord = currentWord.toCharArray()
@@ -54,7 +60,7 @@ class GameViewModel : ViewModel() {
             getNextWord()
         } else {
             _currentScrambledWord = String(tempWord)
-            ++currentWordCount
+            ++_currentWordCount
             wordsList.add(currentWord)
         }
     }
@@ -64,7 +70,7 @@ class GameViewModel : ViewModel() {
     * Updates the next word.
     */
     fun nextWord(): Boolean {
-        return if (currentWordCount < MAX_NO_OF_WORDS) {
+        return if (_currentWordCount < MAX_NO_OF_WORDS) {
             getNextWord()
             true
         } else false
