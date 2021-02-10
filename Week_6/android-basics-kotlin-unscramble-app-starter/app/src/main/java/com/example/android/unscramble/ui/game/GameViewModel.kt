@@ -19,6 +19,10 @@ class GameViewModel : ViewModel() {
     // Return the private property's value in the getter method.
     // When count is accessed, the get() function is called and
     // the value of _count is returned.
+    private var _score = 0
+    val score: Int
+        get() = _score
+
     val count: Int
         get() = _count
 
@@ -64,5 +68,18 @@ class GameViewModel : ViewModel() {
             getNextWord()
             true
         } else false
+    }
+
+    private fun increaseScore(){
+        _score += SCORE_INCREASE
+    }
+
+    fun isUserWordCorrect(playerWord: String): Boolean{
+        if(playerWord.equals(currentWord, true)){
+            increaseScore()
+            return true
+        }
+
+        return false
     }
 }
