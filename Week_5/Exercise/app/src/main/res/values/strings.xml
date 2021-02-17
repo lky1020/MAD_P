@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Exercise</string>
+    <string name="name">Name</string>
+    <string name="welcome">Welcome:</string>
+    <string name="weight">Weight:</string>
+    <string name="height">Height:</string>
+    <string name="status">Status:</string>
+    <string name="calculate">Calculate</string>
+    <string name="kg">KG</string>
+    <string name="Meter">M</string>
 </resources>
