@@ -124,21 +124,25 @@ class MainFragment : Fragment() {
     }
 
     private fun launchSignInFlow() {
-        // Give users the option to sign in / register with their email
+        // Give users the option to sign in / register with their email or Google account.
         // If users choose to register with their email,
-        // they will need to create a password as well
+        // they will need to create a password as well.
         val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build()
-            //
+            AuthUI.IdpConfig.EmailBuilder().build(), AuthUI.IdpConfig.GoogleBuilder().build()
+
+            // This is where you can provide more ways for users to register and
+            // sign in.
         )
 
-        // Create and launch sign-in intent.
+        // Create and launch the sign-in intent.
         // We listen to the response of this activity with the
-        // SIGN_IN_RESULT_CODE code
+        // SIGN_IN_RESULT_CODE.
         startActivityForResult(
-            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(
-                    providers
-                ).build(), MainFragment.SIGN_IN_RESULT_CODE
+            AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build(),
+            SIGN_IN_RESULT_CODE
         )
     }
 }
