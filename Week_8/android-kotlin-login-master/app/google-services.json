@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "294349101956",
+    "project_id": "ky-week8",
+    "storage_bucket": "ky-week8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294349101956:android:3f44f4e396ae357f439bd1",
+        "android_client_info": {
+          "package_name": "com.example.android.firebaseui_login_sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294349101956-iudgvkn82p2j0g0pma1270i1mtrilmo8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFI_NZs-U5BcHn9KMl6LxSIiWxVrkL6ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294349101956-iudgvkn82p2j0g0pma1270i1mtrilmo8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
