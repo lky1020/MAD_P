@@ -117,6 +117,21 @@ class SleepTrackerViewModel(
         _navigateToSleepQuality.value = null
     }
 
+    /**
+     * Navigation for the SleepDetail fragment.
+     */
+    private val _navigateToSleepDetail = MutableLiveData<Long>()
+    val navigateToSleepDetail
+        get() = _navigateToSleepDetail
+
+    fun onSleepNightClicked(id: Long) {
+        _navigateToSleepDetail.value = id
+    }
+
+    fun onSleepDetailNavigated() {
+        _navigateToSleepDetail.value = null
+    }
+
     init {
         initializeTonight()
     }
@@ -204,4 +219,5 @@ class SleepTrackerViewModel(
             _showSnackbarEvent.value = true
         }
     }
+
 }
