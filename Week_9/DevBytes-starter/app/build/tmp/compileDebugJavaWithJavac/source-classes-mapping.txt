@@ -16,6 +16,9 @@ com/example/android/devbyteviewer/databinding/DevbyteItemBinding.java
  com.example.android.devbyteviewer.databinding.DevbyteItemBinding
 androidx/databinding/DataBindingComponent.java
  androidx.databinding.DataBindingComponent
+com/example/android/devbyteviewer/database/VideosDatabase_Impl.java
+ com.example.android.devbyteviewer.database.VideosDatabase_Impl
+ com.example.android.devbyteviewer.database.VideosDatabase_Impl$1
 com/example/android/devbyteviewer/DataBinderMapperImpl.java
  com.example.android.devbyteviewer.DataBinderMapperImpl
  com.example.android.devbyteviewer.DataBinderMapperImpl$InnerBrLookup
@@ -23,5 +26,9 @@ com/example/android/devbyteviewer/DataBinderMapperImpl.java
 com/example/android/devbyteviewer/generated/callback/OnClickListener.java
  com.example.android.devbyteviewer.generated.callback.OnClickListener
  com.example.android.devbyteviewer.generated.callback.OnClickListener$Listener
+com/example/android/devbyteviewer/database/VideoDao_Impl.java
+ com.example.android.devbyteviewer.database.VideoDao_Impl
+ com.example.android.devbyteviewer.database.VideoDao_Impl$1
+ com.example.android.devbyteviewer.database.VideoDao_Impl$2
 com/example/android/devbyteviewer/databinding/DevbyteItemBindingImpl.java
  com.example.android.devbyteviewer.databinding.DevbyteItemBindingImpl
