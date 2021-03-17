@@ -4,14 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.recyclerviewdemo.data.StudentDAO
+import com.example.recyclerviewdemo.data.StudentEntity
 
 @Database(entities = [StudentEntity::class], version = 1, exportSchema = false)
 abstract class StudentDB: RoomDatabase() {
-
     abstract fun studentDAO(): StudentDAO
 
     companion object{
-        private var INSTANCE: StudentDB? = null
+        private var INSTANCE : StudentDB? = null
 
         fun getDatabase(context: Context): StudentDB{
             synchronized(this){
@@ -26,7 +27,6 @@ abstract class StudentDB: RoomDatabase() {
 
                     INSTANCE = instance
                 }
-
                 return instance
             }
         }

@@ -9,11 +9,12 @@ import com.example.recyclerviewdemo.data.StudentDB
 import com.example.recyclerviewdemo.data.StudentEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    val studentList = ArrayList<Student>()
+    private lateinit var recList: Array<StudentEntity>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +30,27 @@ class MainActivity : AppCompatActivity() {
             CoroutineScope(IO).launch {
                 studDao.addStudent(student1)
             }
+        }
 
-//            studentList.add(student1)
+        val btnGet: Button = findViewById(R.id.btn_Get)
+        btnGet.setOnClickListener {
+            var studentList = ArrayList<Student>()
+            val studDao = StudentDB.getDatabase(applicationContext).studentDAO()
 
-//            val recyclerView: RecyclerView = findViewById(R.id.rv_Student)
-//
-//            recyclerView.adapter = StudentAdapter(studentList)
-//            recyclerView.layoutManager = LinearLayoutManager(this)
-//            recyclerView.setHasFixedSize(true)
+            CoroutineScope(Main).launch {
+                recList = studDao.getAll()
+
+                for(i in recList){
+                    studentList.add(Student(R.drawable.ic_android, i.name, i.programme))
+                }
+
+                val recyclerView: RecyclerView = findViewById(R.id.rv_Student)
+
+                recyclerView.adapter = StudentAdapter(studentList)
+                recyclerView.layoutManager = LinearLayoutManager(application)
+                recyclerView.setHasFixedSize(true)
+
+            }
         }
     }
 }
