@@ -12,5 +12,5 @@ interface StudentDAO {
     suspend fun addStudent(s: StudentEntity)
 
     @Query("Select * from Student")
-    fun getAll(): Array<StudentEntity>
+    suspend fun getAll(): Array<StudentEntity>
 }
